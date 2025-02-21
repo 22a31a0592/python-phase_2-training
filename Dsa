@@ -1,0 +1,870 @@
+"""#simple jump game
+l=[1,2,1,3,9,0,1,1,1]
+i=0
+while i<len(l):
+    if l[i]==0:
+        print(l[i])
+        break
+    print(l[i])
+    i=i+l[i]"""
+ 
+#stack code
+"""
+class stack:
+ 
+    def __init__(self):
+        self.size=4
+        self.stack=[0 for i in range(self.size)]
+        self.top=-1
+ 
+ 
+    def push(self,data):
+        if  self.top ==  self.size-1:
+            print("overflow")
+        else:
+            self.top+=1
+            self.stack[self.top]=data
+ 
+    def display(self):
+        if self.top==-1:
+            print("underflow")
+        else:
+            for i in range(self.top,-1,-1):
+                print(self.stack[i],end=" ")
+ 
+    def pop(self):
+        if self.top==-1:
+            print("underflow")
+        else:
+            self.top-=1
+            return self.stack[self.top+1]
+ 
+    def peek(self):
+        if self.top==-1:
+            print("underflow")
+        else:
+            print(self.stack[self.top])
+ 
+ 
+obj=stack()
+ 
+obj.push(5)
+obj.push(2)
+obj.push(1)
+obj.peek() 
+"""
+
+#Queue
+
+"""
+class Queue:
+    def __init__(self):
+        self.size=5
+        self.queue=[0 for i in range(self.size)]
+        self.front=-1
+        self.rear=-1
+ 
+    def enqueue(self,data):
+        if self.rear == self.size-1:
+            print("isFull")
+            return
+        if self.front==-1:
+            self.front=self.rear=0
+            self.queue[self.rear]=data
+        else:
+            self.rear += 1
+            self.queue[self.rear]=data
+ 
+    def isEmpty(self):
+        return self.front==-1 or self.front>self.rear
+ 
+    def dequeue(self):
+        if self.isEmpty():
+            print("isEmpty")
+            return
+        self.front+=1
+ 
+    def display(self):
+        if self.isEmpty():
+            print("isEmpty")
+            return
+        for i in range(self.front,self.rear +1):
+            print(self.queue[i],end=" ")
+ 
+    def Front(self):
+        if self.isEmpty():
+            print("isEmpty")
+            return
+        print(self.queue[self.front])
+ 
+ 
+obj=Queue()
+obj.enqueue(5)
+obj.enqueue(7)
+obj.enqueue(8)
+obj.display()
+print()
+obj.dequeue()
+obj.Front()
+obj.display()
+"""
+
+# linked list
+#single linked list
+"""
+class Node:
+    def __init__(self,data):
+        self.data=data
+        self.next=None
+ 
+class Linked_list:
+    def __init__(self):
+        self.head=None
+ 
+    def b_insert(self,data):
+        newnode=Node(data)
+        if self.head is None:
+            self.head=newnode
+            return
+        newnode.next=self.head
+        self.head=newnode
+ 
+    def display(self):
+        if self.head is None:
+            print("Empty")
+        else:
+            cur = self.head
+            while cur:
+                print(cur.data,end="->")
+                cur=cur.next
+
+    def end_insertion(self,data):
+        newnode=Node(data)
+        if self.head is None:
+            self.head=newnode
+            return
+        cur=self.head
+        while cur.next:
+            cur=cur.next
+        cur.next = newnode
+
+    def delete_begin(self):
+        if self.head is None:
+            print("cannot delete because empty")
+            return
+        temp=self.head
+        self.head=self.head.next
+        temp.next=None
+    
+    def delete_end(self):
+        if self.head is None:
+            print("cannot delete")
+            return
+        if self.head.next is None:
+            self.head=None
+            return
+        cur=self.head
+        while cur.next.next:
+            cur=cur.next
+        cur.next=None
+
+    def insert_by_position(self,data,position):
+        newnode=Node(data)
+        cur=self.head
+        if position==0:
+            self.b_insert(data)
+        for i in range(position-1):
+            cur=cur.next
+        newnode.next=cur.next
+        cur.next=newnode
+
+    def delete_by_position(self,position):
+        if position ==0:
+            self.begin_delete()
+            return 
+        cur=self.head
+        for i in range(position-1):
+            if cur is None:                                      #cur: current
+                print("position not found")
+                break
+            cur=cur.next
+        else:
+            cur.next=cur.next.next
+
+
+ 
+obj=Linked_list()
+obj.b_insert(4)
+obj.b_insert(7)
+obj.b_insert(8)
+#obj.delete_begin()
+#obj.delete_end()
+obj.insert_by_position(5,1)
+obj.delete_by_position(2)
+obj.display()
+"""
+#Double linked list
+"""
+class Node:
+    def __init__(self,data):
+        self.data=data
+        self.prev=None
+        self.next=None
+class Dobule_linkedlist:
+    def __init__(self):
+        self.head=None
+        self.tail=None
+ 
+    def begin_insert(self,data):
+        newnode=Node(data)
+        if self.head is None:
+            self.head=self.tail=newnode
+            return
+        newnode.next=self.head
+        self.head.prev=newnode
+        self.head=newnode
+ 
+    def end_insert(self,data):
+        newnode=Node(data)
+        if self.head is None:
+            self.head=self.tail=newnode
+            return
+        newnode.prev=self.tail
+        self.tail.next=newnode
+        self.tail=newnode
+ 
+    def forward_display(self):
+        if self.head is None:
+            print("Empty")
+            return
+        cur=self.head
+        while cur:
+            print(cur.data,end="->")
+            cur=cur.next
+    def backward_display(self):
+        if self.head is None:
+            print("Empty")
+            return
+        cur = self.tail
+        while cur:
+            print(cur.data,end="->")
+            cur=cur.prev
+
+    def begin_deletion(self):
+        if self.head is None:
+            print("Empty")
+            return
+        if self.head.next is None:
+            self.head=self.tail=None
+            return
+        self.head=self.head.next
+        self.head.prev.next=None
+        self.head.prev=None
+ 
+    def end_deletion(self):
+        if self.head is None:
+            print("Empty")
+            return
+        if self.head.next is None:
+            self.head=self.tail=None
+            return
+        self.tail=self.tail.prev
+        self.tail.next.prev=None
+        self.tail.next=None
+
+    def delete_by_data(self,key):
+        if self.head is None:
+            print("Empty")
+            return
+        if self.head.data==key:
+            self.begin_deletion()
+            return
+        if key == self.tail.data:
+                self.end_deletion()
+                return
+        cur = self.head
+        while cur and cur.data!=key:
+            cur=cur.next
+        if cur:
+            cur.prev.next = cur.next
+            cur.next.prev = cur.prev
+            cur.prev=cur.next=None 
+        else:
+            print("no data found")
+
+ 
+ 
+obj=Dobule_linkedlist()
+obj.begin_insert(8)
+obj.begin_insert(9)
+obj.begin_insert(15)
+obj.end_insert(7)
+obj.begin_deletion()
+obj.end_deletion()
+obj.delete_by_data(7)
+obj.forward_display()
+print()
+obj.backward_display()"""
+
+""" insert for position
+    newnode.prev=cur 
+    newnode.next=cur.next
+    cur.next=newnode
+    newnode.next.prev=cur """
+
+"""delete by position
+  
+  temp=cur.next
+  cur.next=cur.next.next
+  cur.next.prev=cur
+  temp.prev=temp.next=None"""
+
+###### reverse a single linked list ######
+"""
+class Node:
+    def __init__(self,data):
+        self.data=data
+        self.next=None
+ 
+class Linked_list:
+    def __init__(self):
+        self.head=None
+ 
+    def b_insert(self,data):
+        newnode=Node(data)
+        if self.head is None:
+            self.head=newnode
+            return
+        newnode.next=self.head
+        self.head=newnode
+ 
+    def display(self):
+        if self.head is None:
+            print("Empty")
+        else:
+            cur = self.head
+            while cur:
+                print(cur.data,end="->")
+                cur=cur.next
+
+    def end_insertion(self,data):
+        newnode=Node(data)
+        if self.head is None:
+            self.head=newnode
+            return
+        cur=self.head
+        while cur.next:
+            cur=cur.next
+        cur.next = newnode
+    
+    def reverse_single_linked_list(self):
+        if self.head is None:
+            print("cannot reverse")
+            return
+        prev=None
+        cur=self.head
+        while cur:
+            temp=cur.next
+            cur.next=prev
+            prev=cur
+            cur=temp
+        self.head=prev
+
+    def min_value(self):
+        min=self.head.data
+        cur=self.head.next
+        while cur:
+            if cur.data<min:
+                min=cur.data
+            cur=cur.next
+        print(min)
+
+ 
+obj=Linked_list()
+obj.b_insert(4)
+obj.b_insert(7)
+obj.b_insert(8)
+#obj.delete_begin()
+#obj.delete_end()
+#obj.insert_by_position(5,1)
+#obj.delete_by_position(2)
+obj.reverse_single_linked_list()
+obj.min_value()
+obj.display()"""
+# binary tree traversals
+"""
+class Node:
+    def __init__(self,data):
+        self.data = data 
+        self.right = None
+        self.left = None
+def inorder_traversel(root):
+    if root is not None:
+        inorder_traversel(root.left)
+        print(root.data,end=" ")
+        inorder_traversel(root.right)
+
+def preorder_traversel(root):
+    if root is not None:
+        print(root.data,end=" ")
+        preorder_traversel(root.left)
+        preorder_traversel(root.right)
+
+def postorder_traversel(root):
+    if root is not None:
+        inorder_traversel(root.left)
+        inorder_traversel(root.right)
+        print(root.data,end=" ")
+        
+
+root = Node(5)
+root.left =Node(18)
+root.right=Node(30)
+root.left.left=Node(4)
+root.left.right=Node(45)
+root.right.left=Node(22)
+root.right.right=Node(7)
+inorder_traversel(root)
+preorder_traversel(root)
+postorder_traversel(root)
+"""
+###  binary search tree
+"""
+class Node:
+    def __init__(self,data):
+        self.data = data 
+        self.right = None
+        self.left = None
+class Tree:
+    def __init__(self):
+        self.root=None
+
+    def insert(self,data):
+        self.root=self.rec_insert(self.root,data)
+
+    def rec_insert(self,root,data):
+        if root is None:
+            return Node(data)
+        if root.data<data:
+            root.right=self.rec_insert(root.right,data)
+        else:
+            root.left=self.rec_insert(root.left,data)
+        return root
+
+    def inorder_traversal(self,root):
+        if root is not None:
+            self.inorder_traversal(root.left)
+            print(root.data,end=" ")
+            self.inorder_traversal(root.right)
+
+    def min_val(self):
+        if self.root==None:
+            print("not found")
+            return 
+        cur=self.root
+        while cur.left:
+            cur=cur.left
+        print(f"\n{cur.data}")   
+        
+    def max_val(self):
+        if self.root==None:
+            print("not found")
+            return 
+        cur=self.root
+        while cur.right:
+            cur=cur.right
+        print(cur.data) 
+
+
+
+obj=Tree()
+obj.insert(20)
+obj.insert(10)
+obj.insert(7)
+obj.insert(27)
+obj.insert(34)
+obj.insert(3)
+obj.insert(9)
+obj.insert(25)
+obj.insert(18)
+obj.inorder_traversal(obj.root)
+obj.min_val()
+obj.max_val()
+"""
+####                                     BST deletion
+"""
+class Node:
+    def __init__(self,data):
+        self.data=data
+        self.right=None
+        self.left=None
+class Tree:
+    def __init__(self):
+        self.root=None
+ 
+    def insert(self,data):
+        self.root=self.rec_insert(self.root,data)
+ 
+    def rec_insert(self,root,data):
+        if root is None:
+            return Node(data)
+        if root.data<data:
+            root.right=self.rec_insert(root.right,data)
+        else:
+            root.left=self.rec_insert(root.left,data)
+        return root
+ 
+    def Max(self,root):
+        cur = root
+        while cur.right:
+            cur=cur.right
+        return cur.data
+
+    def inorder_traversal(self,root):
+        if root is not None:
+            self.inorder_traversal(root.left)
+            print(root.data,end=" ")
+            self.inorder_traversal(root.right)
+ 
+    def deletion(self,data):
+        self.root=self.rec_deletion(self.root,data)
+    def rec_deletion(self,root,key):
+        if root is None:
+            return None
+
+        if root.data<key:
+            root.right = self.rec_deletion(root.right,key)
+        elif root.data>key:
+            root.left = self.rec_deletion(root.left,key)
+        else:
+ 
+            if root.left is None:
+                return root.right
+            if root.right is None:
+                return root.left
+ 
+            max = self.Max(root.left)
+            root.data=max
+            root.left = self.rec_deletion(root.left,max)
+        return root   
+
+obj=Tree()
+obj.insert(20)
+obj.insert(10)
+obj.insert(7)
+obj.insert(27)
+obj.insert(34)
+obj.insert(3)
+obj.insert(9)
+obj.insert(25)
+obj.insert(18)
+obj.insert(23)
+obj.insert(22)
+print()
+obj.deletion(27)
+obj.inorder_traversal(obj.root)"""
+#  level order,left view and right view
+"""
+class Node:
+    def __init__(self,data):
+        self.data=data
+        self.right=None
+        self.left=None
+class Tree:
+    def __init__(self):
+        self.root=None
+ 
+    def insert(self,data):
+        self.root=self.rec_insert(self.root,data)
+ 
+    def rec_insert(self,root,data):
+        if root is None:
+            return Node(data)
+        if root.data<data:
+            root.right=self.rec_insert(root.right,data)
+        else:
+            root.left=self.rec_insert(root.left,data)
+        return root
+ 
+    def Max(self,root):
+        cur = root
+        while cur.right:
+            cur=cur.right
+        return cur.data
+ 
+    def inorder_traversal(self,root):
+        if root is not None:
+            self.inorder_traversal(root.left)
+            print(root.data,end=" ")
+            self.inorder_traversal(root.right)
+ 
+    def deletion(self,data):
+        self.root=self.rec_deletion(self.root,data)
+    def rec_deletion(self,root,key):
+        if root is None:
+            return None
+ 
+        if root.data<key:
+            root.right = self.rec_deletion(root.right,key)
+        elif root.data>key:
+            root.left = self.rec_deletion(root.left,key)
+        else:
+ 
+            if root.left is None:
+                return root.right
+            if root.right is None:
+                return root.left
+ 
+            max = self.Max(root.left)
+            root.data=max
+            root.left = self.rec_deletion(root.left,max)
+        return root   
+ 
+    def level_order_traversal(self):
+ 
+        queue = [self.root] # 
+        res = []  # [20]  [10,27]
+        while queue:
+            sub=[] # 10 27
+            for i in range(len(queue)): # 2
+                temp = queue.pop(0) # 27
+                if temp.left:
+                    queue.append(temp.left)
+                if temp.right:
+                    queue.append(temp.right)
+                sub.append(temp.data)
+            res.append(sub)
+        return res
+    def left_view(self):
+        queue=[self.root]
+        res=[]
+        while queue:
+            n=len(queue)
+            for i in range(n):
+                temp=queue.pop(0)
+                if temp.left:
+                    queue.append(temp.left)
+                if temp.right:
+                    queue.append(temp.right)
+                if i==0:
+                    res.append(temp.data)
+        return res
+    def right_view(self):
+        queue=[self.root]
+        res=[]
+        while queue:
+            n=len(queue)
+            for i in range(n):
+                temp=queue.pop(0)
+                if temp.left:
+                    queue.append(temp.left)
+                if temp.right:
+                    queue.append(temp.right)
+                if i==n-1:
+                    res.append(temp.data)
+        return res
+ 
+obj=Tree()
+obj.insert(20)
+obj.insert(10)
+obj.insert(7)
+obj.insert(27)
+obj.insert(34)
+obj.insert(3)
+obj.insert(9)
+obj.insert(25)
+obj.insert(18)
+obj.insert(23)
+obj.insert(22)
+obj.inorder_traversal(obj.root)
+print()
+print ( obj.level_order_traversal() )
+obj.inorder_traversal(obj.root)
+print()
+print(obj.left_view())
+print(obj.right_view())"""
+
+#########################      Graph      
+"""   
+class Graph():
+    def __init__(self):
+        self.graph={}
+    def insert(self,v,e):
+        if v in self.graph:
+            self.graph[v].append(e)
+        else:
+            self.graph[v]=[e]
+    def Dfs(self,start):
+        stack=[start]
+        res=[]
+        while stack:
+            temp=stack.pop()
+            if temp not in res:
+                stack.extend(self.graph[temp])
+                res.append(temp)
+        return res
+
+obj=Graph()
+obj.insert(1,2)
+obj.insert(2,1)
+obj.insert(1,3)
+obj.insert(1,3)
+obj.insert(3,1)
+obj.insert(2,4)
+obj.insert(4,2)
+obj.insert(3,4)
+obj.insert(4,3)
+obj.insert(2,5)
+obj.insert(5,2)
+obj.Dfs(1)"""
+"""
+class graph:
+    def __init__(self):
+        self.size=4
+        self.matrix=[[ 0 for i in range(self.size)] for i in range(self.size)]
+        self.dic={"A":0,"B":1,"C":2,"D":3}
+ 
+    def insert(self,v,e):
+        i,j=self.dic[v],self.dic[e]
+        self.matrix[i][j]=1
+        self.matrix[j][i]=1
+ 
+ 
+obj=graph()
+obj.insert("A","B")
+obj.insert("A","C")
+obj.insert("B","D")
+obj.insert("C","D")
+ 
+for i in obj.matrix:
+    print(i)"""
+"""
+def linear_search(arr,key):
+    for i in range(len(arr)):
+        if arr[i]==key:
+            return f"{key} found in the index of{i}"
+    return "not found"
+arr=[2,5,7,14,9,22]
+print(linear_search(arr,14))"""
+"""
+def Binary_search(arr,key):
+    first=0
+    last=len(arr)-1
+    mid=(first+last)//2
+    for i in range(len(arr)):
+        if arr[mid]==key:
+            return "found"
+        elif key<arr[mid]:
+            for i in range(0,arr[mid]):
+                if arr[i]==key:
+                    return "found"
+        elif key>arr[mid]:
+            for i in range(arr[mid]+1,len(arr)):
+                if arr[i]==key:
+                    return "found"
+    return "not found"
+
+arr=[2,3,4,5,6,7,8]
+print(Binary_search(arr,2))  """
+#####              Bubble sort
+"""
+def Bubble_sort():
+    for phase in range(len(arr)-1):
+        check=True
+        for j in range(len(arr)-1-phase):
+            if arr[j]>arr[j+1]:
+                arr[j],arr[j+1]=arr[j+1],arr[j]
+                check=False
+        if check: return arr 
+    return arr
+arr=[23,12,7,14,9,4]
+print(Bubble_sort())"""
+###########################          selection sort
+"""
+def selection_sort(arr):
+    for i in range(len(arr)-1):
+        min=i
+        for j in range(i+1,len(arr)):
+            if arr[j]<arr[min]:
+                min=j
+        if min!=i:
+            arr[min],arr[i]=arr[i],arr[min]
+    return arr
+arr=[23,12,7,14,9,4]
+print(selection_sort(arr))"""
+###################  insertion sort
+"""
+def insertion_sort(arr):
+    for i in range(1,len(arr)):
+        j=i-1
+        temp=arr[i]
+        while j>=0 and arr[j]>temp:
+            arr[j+1]=arr[j]
+            j-=1
+        arr[j+1]=temp  
+    return arr
+arr=[15,7,3,9,5]
+print(insertion_sort(arr))"""
+#####                QUICK SORT
+def quick_sort(arr,left,right):
+    if left<right:
+        p_i = partition(arr,left,right)
+        quick_sort(arr,left, p_i-1)
+        quick_sort(arr,p_i + 1 , right)
+def partition(arr,left,right):
+ 
+    i=left
+    pivot=arr[right]
+    j=right-1
+ 
+    while i<j:
+        while i<right and arr[i]<pivot:
+            i += 1
+        while j>left and arr[j]>=pivot:
+            j -= 1
+        if i < j:
+            arr[i],arr[j]=arr[j],arr[i]
+    if arr[i]>pivot:
+        arr[i],arr[right]=arr[right],arr[i]
+    return i
+arr=[15,7,1,25,18]
+quick_sort(arr,0,len(arr)-1)
+print(arr)
+
+"""
+
+def merge(arr):
+    if len(arr)>1:
+        left_arr= arr[:len(arr)//2]
+        right_arr = arr[len(arr)//2 : ]
+ 
+        merge(left_arr)
+        merge(right_arr)
+ 
+        i=0
+        j=0
+        k=0
+ 
+        while i<len(left_arr) and j<len(right_arr):
+            if left_arr[i]<right_arr[j]:
+                arr[k]=left_arr[i]
+                i+=1
+            else:
+                arr[k]=right_arr[j]
+                j+=1
+            k+=1
+        while i<len(left_arr):
+            arr[k]=left_arr[i]
+            i+=1
+            k+=1
+        while j<len(right_arr):
+            arr[k]=right_arr[j]
+            j+=1
+            k+=1
+ 
+ 
+ 
+ 
+arr=[15 , 7 , 1 , 25 , 18]
+merge(arr)   
+print(arr)"""
