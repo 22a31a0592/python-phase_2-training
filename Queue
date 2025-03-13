@@ -1,0 +1,54 @@
+#Queue
+
+"""
+class Queue:
+    def __init__(self):
+        self.size=5
+        self.queue=[0 for i in range(self.size)]
+        self.front=-1
+        self.rear=-1
+ 
+    def enqueue(self,data):
+        if self.rear == self.size-1:
+            print("isFull")
+            return
+        if self.front==-1:
+            self.front=self.rear=0
+            self.queue[self.rear]=data
+        else:
+            self.rear += 1
+            self.queue[self.rear]=data
+ 
+    def isEmpty(self):
+        return self.front==-1 or self.front>self.rear
+ 
+    def dequeue(self):
+        if self.isEmpty():
+            print("isEmpty")
+            return
+        self.front+=1
+ 
+    def display(self):
+        if self.isEmpty():
+            print("isEmpty")
+            return
+        for i in range(self.front,self.rear +1):
+            print(self.queue[i],end=" ")
+ 
+    def Front(self):
+        if self.isEmpty():
+            print("isEmpty")
+            return
+        print(self.queue[self.front])
+ 
+ 
+obj=Queue()
+obj.enqueue(5)
+obj.enqueue(7)
+obj.enqueue(8)
+obj.display()
+print()
+obj.dequeue()
+obj.Front()
+obj.display()
+"""
