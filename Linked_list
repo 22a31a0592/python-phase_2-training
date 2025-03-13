@@ -1,0 +1,282 @@
+# linked list
+#single linked list
+"""
+class Node:
+    def __init__(self,data):
+        self.data=data
+        self.next=None
+ 
+class Linked_list:
+    def __init__(self):
+        self.head=None
+ 
+    def b_insert(self,data):
+        newnode=Node(data)
+        if self.head is None:
+            self.head=newnode
+            return
+        newnode.next=self.head
+        self.head=newnode
+ 
+    def display(self):
+        if self.head is None:
+            print("Empty")
+        else:
+            cur = self.head
+            while cur:
+                print(cur.data,end="->")
+                cur=cur.next
+
+    def end_insertion(self,data):
+        newnode=Node(data)
+        if self.head is None:
+            self.head=newnode
+            return
+        cur=self.head
+        while cur.next:
+            cur=cur.next
+        cur.next = newnode
+
+    def delete_begin(self):
+        if self.head is None:
+            print("cannot delete because empty")
+            return
+        temp=self.head
+        self.head=self.head.next
+        temp.next=None
+    
+    def delete_end(self):
+        if self.head is None:
+            print("cannot delete")
+            return
+        if self.head.next is None:
+            self.head=None
+            return
+        cur=self.head
+        while cur.next.next:
+            cur=cur.next
+        cur.next=None
+
+    def insert_by_position(self,data,position):
+        newnode=Node(data)
+        cur=self.head
+        if position==0:
+            self.b_insert(data)
+        for i in range(position-1):
+            cur=cur.next
+        newnode.next=cur.next
+        cur.next=newnode
+
+    def delete_by_position(self,position):
+        if position ==0:
+            self.begin_delete()
+            return 
+        cur=self.head
+        for i in range(position-1):
+            if cur is None:                                      #cur: current
+                print("position not found")
+                break
+            cur=cur.next
+        else:
+            cur.next=cur.next.next
+
+
+ 
+obj=Linked_list()
+obj.b_insert(4)
+obj.b_insert(7)
+obj.b_insert(8)
+#obj.delete_begin()
+#obj.delete_end()
+obj.insert_by_position(5,1)
+obj.delete_by_position(2)
+obj.display()
+"""
+#Double linked list
+"""
+class Node:
+    def __init__(self,data):
+        self.data=data
+        self.prev=None
+        self.next=None
+class Dobule_linkedlist:
+    def __init__(self):
+        self.head=None
+        self.tail=None
+ 
+    def begin_insert(self,data):
+        newnode=Node(data)
+        if self.head is None:
+            self.head=self.tail=newnode
+            return
+        newnode.next=self.head
+        self.head.prev=newnode
+        self.head=newnode
+ 
+    def end_insert(self,data):
+        newnode=Node(data)
+        if self.head is None:
+            self.head=self.tail=newnode
+            return
+        newnode.prev=self.tail
+        self.tail.next=newnode
+        self.tail=newnode
+ 
+    def forward_display(self):
+        if self.head is None:
+            print("Empty")
+            return
+        cur=self.head
+        while cur:
+            print(cur.data,end="->")
+            cur=cur.next
+    def backward_display(self):
+        if self.head is None:
+            print("Empty")
+            return
+        cur = self.tail
+        while cur:
+            print(cur.data,end="->")
+            cur=cur.prev
+
+    def begin_deletion(self):
+        if self.head is None:
+            print("Empty")
+            return
+        if self.head.next is None:
+            self.head=self.tail=None
+            return
+        self.head=self.head.next
+        self.head.prev.next=None
+        self.head.prev=None
+ 
+    def end_deletion(self):
+        if self.head is None:
+            print("Empty")
+            return
+        if self.head.next is None:
+            self.head=self.tail=None
+            return
+        self.tail=self.tail.prev
+        self.tail.next.prev=None
+        self.tail.next=None
+
+    def delete_by_data(self,key):
+        if self.head is None:
+            print("Empty")
+            return
+        if self.head.data==key:
+            self.begin_deletion()
+            return
+        if key == self.tail.data:
+                self.end_deletion()
+                return
+        cur = self.head
+        while cur and cur.data!=key:
+            cur=cur.next
+        if cur:
+            cur.prev.next = cur.next
+            cur.next.prev = cur.prev
+            cur.prev=cur.next=None 
+        else:
+            print("no data found")
+
+ 
+ 
+obj=Dobule_linkedlist()
+obj.begin_insert(8)
+obj.begin_insert(9)
+obj.begin_insert(15)
+obj.end_insert(7)
+obj.begin_deletion()
+obj.end_deletion()
+obj.delete_by_data(7)
+obj.forward_display()
+print()
+obj.backward_display()"""
+
+""" insert for position
+    newnode.prev=cur 
+    newnode.next=cur.next
+    cur.next=newnode
+    newnode.next.prev=cur """
+
+"""delete by position
+  
+  temp=cur.next
+  cur.next=cur.next.next
+  cur.next.prev=cur
+  temp.prev=temp.next=None"""
+
+###### reverse a single linked list ######
+"""
+class Node:
+    def __init__(self,data):
+        self.data=data
+        self.next=None
+ 
+class Linked_list:
+    def __init__(self):
+        self.head=None
+ 
+    def b_insert(self,data):
+        newnode=Node(data)
+        if self.head is None:
+            self.head=newnode
+            return
+        newnode.next=self.head
+        self.head=newnode
+ 
+    def display(self):
+        if self.head is None:
+            print("Empty")
+        else:
+            cur = self.head
+            while cur:
+                print(cur.data,end="->")
+                cur=cur.next
+
+    def end_insertion(self,data):
+        newnode=Node(data)
+        if self.head is None:
+            self.head=newnode
+            return
+        cur=self.head
+        while cur.next:
+            cur=cur.next
+        cur.next = newnode
+    
+    def reverse_single_linked_list(self):
+        if self.head is None:
+            print("cannot reverse")
+            return
+        prev=None
+        cur=self.head
+        while cur:
+            temp=cur.next
+            cur.next=prev
+            prev=cur
+            cur=temp
+        self.head=prev
+
+    def min_value(self):
+        min=self.head.data
+        cur=self.head.next
+        while cur:
+            if cur.data<min:
+                min=cur.data
+            cur=cur.next
+        print(min)
+
+ 
+obj=Linked_list()
+obj.b_insert(4)
+obj.b_insert(7)
+obj.b_insert(8)
+#obj.delete_begin()
+#obj.delete_end()
+#obj.insert_by_position(5,1)
+#obj.delete_by_position(2)
+obj.reverse_single_linked_list()
+obj.min_value()
+obj.display()"""
